@@ -1,0 +1,6 @@
+{
+    "password": "password",
+    "method": "rc4-md5",
+    "fast_open": true
+}
+
