@@ -12,7 +12,7 @@ before_install:
 install:
     - docker build -t cyclopszhao/shadowsocks:latest versions/shadowsocks
 
-# script: true
+script: true
 
 after_success:
     - echo $DOCKER_USER
