@@ -1,0 +1,14 @@
+version: '3'
+services:
+    shadowsocks:
+        build:
+            context: ./versions/shadowsocks
+        command: ["ssserver", "-c", "/etc/shadowsocks.json"]
+        image: shadowsocks:latest
+        ports:
+            - "8388:8388"
+        restart: on-failure
+        tty: true
+        volumes:
+            - ./shadowsocks.json:/etc/shadowsocks.json
+
