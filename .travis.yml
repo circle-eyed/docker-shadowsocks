@@ -4,7 +4,6 @@ env:
     global:
         - REPO=$DOCKER_USERNAME/shadowsocks
         - COMMIT=${TRAVIS_COMMIT::8}
-        - TAG=`if ["$TRAVIS_BRANCH" == "master"]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
 
 language: python
 
@@ -14,8 +13,6 @@ services:
 before_install:
     - docker version
     - docker-compose version
-    - echo $COMMIT
-    - echo $TAG
 
 install:
     - docker build -t $REPO:$COMMIT versions/shadowsocks
@@ -23,6 +20,7 @@ install:
 script: true
 
 after_success:
+    - export TAG=`if ["$TRAVIS_BRANCH" == "master"]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker tag $REPO:$COMMIT $REPO:TAG
     - docker push $REPO:$TAG
