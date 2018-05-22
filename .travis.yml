@@ -1,5 +1,9 @@
 sudo: required
 
+env:
+    - REPO=$DOCKER_USERNAME/shadowsocks
+    - TAG=`if ["$TRAVIS_BRANCH" == "master"]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
+
 language: python
 
 services:
@@ -8,17 +12,17 @@ services:
 before_install:
     - docker version
     - docker-compose version
+    - echo $REPO
+    - echo $TAG
 
 install:
-    - docker build -t cyclopszhao/shadowsocks:latest versions/shadowsocks
+    - docker build -t $REPO:$TAG versions/shadowsocks
 
 script: true
 
 after_success:
-    - echo $DOCKER_USER
-    - echo $DOCKER_PASS
-    - echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-    - docker push cyclopszhao/shadowsocks:latest
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    - docker push $REPO:$TAG
     - docker logout
 
 # before_deploy: true
