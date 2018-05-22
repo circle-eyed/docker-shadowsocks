@@ -14,11 +14,13 @@ install:
 
 script: true
 
-before_deploy:
+after_success:
     - echo $DOCKER_USER
     - echo $DOCKER_PASS
-
-deploy:
     - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
     - docker push cyclopszhao/shadowsocks:latest
     - docker logout
+
+before_deploy: true
+
+deploy: true
