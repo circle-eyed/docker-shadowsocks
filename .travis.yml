@@ -12,7 +12,7 @@ before_install:
 install:
     - docker build -t cyclopszhao/shadowsocks:latest versions/shadowsocks
 
-script: true
+# script: true
 
 after_success:
     - echo $DOCKER_USER
@@ -21,6 +21,6 @@ after_success:
     - docker push cyclopszhao/shadowsocks:latest
     - docker logout
 
-before_deploy: true
+# before_deploy: true
 
-deploy: true
+# deploy: true
