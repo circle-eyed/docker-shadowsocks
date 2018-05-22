@@ -3,10 +3,10 @@ services:
     shadowsocks:
         build:
             context: ./versions/shadowsocks
-        command: ["ssserver", "-c", "/etc/shadowsocks.json"]
+        command: ["sslocal", "-c", "/etc/shadowsocks.json"]
         image: shadowsocks:latest
         ports:
-            - "8388:8388"
+            - "1080:1080"
         restart: on-failure
         tty: true
         volumes:

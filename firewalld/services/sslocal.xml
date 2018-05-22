@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>Shadowsocks</short>
+  <description>Shadowsocks is a fast tunnel proxy that helps you bypass firewalls.</description>
+  <port protocol="tcp" port="1080"/>
+  <port protocol="udp" port="1080"/>
+</service>

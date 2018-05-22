@@ -15,10 +15,10 @@ install:
 script: true
 
 before_deploy:
-    - echo $DOCKER_USERNAME
+    - echo $DOCKER_USER
+    - echo $DOCKER_PASS
 
 deploy:
-    provider: script
-    script: sh docker_push.sh
-    on:
-        branch: master
+    - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+    - docker push cyclopszhao/shadowsocks:latest
+    - docker logout
