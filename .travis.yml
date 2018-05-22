@@ -20,7 +20,7 @@ install:
 script: true
 
 after_success:
-    - export TAG=`if [$TRAVIS_BRANCH == "master"]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
+	- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     - docker tag $REPO:$COMMIT $REPO:TAG
     - docker push $REPO:$TAG
