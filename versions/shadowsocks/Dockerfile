@@ -1,6 +1,6 @@
 FROM python:3.6-alpine as builder
 
-RUN apk add --no-cache g++ openssl-dev \
+RUN apk add --no-cache --update g++ openssl-dev \
  && pip install m2crypto
 
 FROM python:3.6-alpine
@@ -16,7 +16,7 @@ RUN addgroup shadowsocks \
 
 COPY --from=builder $SITE_PACKAGES $SITE_PACKAGES
 
-RUN apk add --no-cache git libsodium su-exec \
+RUN apk add --no-cache --update git libsodium su-exec \
  && pip install git+https://github.com/shadowsocks/shadowsocks.git@master \
  && apk del git
 
