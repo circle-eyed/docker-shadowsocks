@@ -32,6 +32,3 @@ after_success:
     - docker push $REPO:$TAG
     - docker logout
 
-# before_deploy: true
-
-# deploy: true
