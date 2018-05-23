@@ -1,0 +1,6 @@
+{
+    "server": "ssserver_ip",
+    "password": "mypassword",
+    "fast_open": true
+}
+

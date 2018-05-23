@@ -4,11 +4,11 @@ services:
         build:
             context: ./versions/shadowsocks
         command: ["sslocal", "-c", "/etc/shadowsocks.json"]
-        image: shadowsocks:latest
+        image: cyclopszhao/shadowsocks:latest
         ports:
             - "1080:1080"
         restart: on-failure
         tty: true
         volumes:
-            - ./shadowsocks.json:/etc/shadowsocks.json
+            - ./shadowsocks-sslocal.json:/etc/shadowsocks.json
 
