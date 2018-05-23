@@ -23,7 +23,7 @@ before_script:
     - docker build -t $REPO:$COMMIT versions/shadowsocks
 
 script: 
-    - container-structure-test help
+    - container-structure-test test --image $REPO:$COMMIT --config shadowsocks_test_config.yml
 
 after_success:
     - export TAG=`if [ $TRAVIS_BRANCH == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`

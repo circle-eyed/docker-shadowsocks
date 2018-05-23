@@ -18,7 +18,7 @@ COPY --from=builder $SITE_PACKAGES $SITE_PACKAGES
 
 RUN apk add --no-cache --update git libsodium su-exec \
  && pip install git+https://github.com/shadowsocks/shadowsocks.git@master \
- && apk del git
+ && apk del --purge git
 
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh \

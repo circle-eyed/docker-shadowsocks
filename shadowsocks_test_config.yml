@@ -1,0 +1,46 @@
+schemaVersion: '2.0.0'
+
+commandTests:
+    - name: 'pip'
+      command: 'pip'
+      args: ['list']
+      expectedOutput: ['M2Crypto', 'shadowsocks']
+    - name: 'group shadowsocks'
+      command: 'cat'
+      args: ['/etc/group']
+      expectedOutput: ['shadowsocks']
+    - name: 'user shadowsocks'
+      command: 'cat'
+      args: ['/etc/passwd']
+      expectedOutput: ['shadowsocks']
+    - name: 'apk info'
+      command: 'apk'
+      args: ['info']
+      expectedOutput: ['libsodium', 'su-exec']
+      excludedOutput: ['git']
+
+fileExistenceTests:
+    - name: 'ssserver'
+      path: '/usr/local/bin/ssserver'
+      shouldExist: true
+      permissions: '-rwxr-xr-x'
+    - name: 'sslocal'
+      path: '/usr/local/bin/sslocal'
+      shouldExist: true
+      permissions: '-rwxr-xr-x'
+    - name: 'docker-entrypoint.sh'
+      path: '/usr/local/bin/docker-entrypoint.sh'
+      shouldExist: true
+      permissions: '-rwxrwxr-x'
+    - name: 'link docker-entrypoint.sh'
+      path: '/docker-entrypoint.sh'
+      shouldExist: true
+      permissions: 'Lrwxrwxrwx'
+
+metadataTest:
+    entrypoint: ['docker-entrypoint.sh']
+    exposedPorts: ['1080', '6001', '8388']
+    labels:
+        - key: 'maintainer'
+          value: 'cyclops.zhao@protonmail.com'
+
