@@ -28,7 +28,10 @@ script:
 after_success:
     - export TAG=`if [ $TRAVIS_BRANCH == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
     - docker tag $REPO:$COMMIT $REPO:$TAG
-    - curl -H "Content-Type: application/json" --data '{"docker_tag": $TRAVIS_BRANCH}' -X POST https://registry.hub.docker.com/u/circleeyed/docker-shadowsocks/trigger/$DOCKER_TRIGGER_TOKEN/
+    - >
+    curl -H "Content-Type: application/json"
+         --data '{"docker_tag": $TRAVIS_BRANCH}'
+         -X POST https://registry.hub.docker.com/u/circleeyed/docker-shadowsocks/trigger/$DOCKER_TRIGGER_TOKEN/
     # - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
     # - docker push $REPO:$TAG
     # - docker logout
