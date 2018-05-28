@@ -28,7 +28,7 @@ script:
 after_success:
     - export TAG=`if [ $TRAVIS_BRANCH == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH; fi`
     - export HEADERS=\"Content-Type:\ application/json\"
-    - export DATA=\"{"docker_tag":\ $TRAVIS_BRANCH}\"
+    - export DATA=\'\{\"docker_tag\":\ $TRAVIS_BRANCH\}\'
     - echo $HEADERS
     - echo $DATA
     - docker tag $REPO:$COMMIT $REPO:$TAG
