@@ -1,8 +1,10 @@
 version: "3"
 services:
-    shadowsocks:
+    ssserver:
         command: ["ssserver", "-c", "/etc/ssserver.json"]
         image: cyclopszhao/shadowsocks:latest
+        networks:
+            - ssserver
         ports:
             - 8388:8388
         restart: on-failure
@@ -10,3 +12,6 @@ services:
         volumes:
             - ./ssserver.json:/etc/ssserver.json
 
+networks:
+    ssserver:
+        driver: bridge

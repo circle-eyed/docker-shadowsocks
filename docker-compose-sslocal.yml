@@ -1,8 +1,10 @@
 version: "3"
 services:
-    shadowsocks:
+    sslocal:
         command: ["sslocal", "-c", "/etc/sslocal.json"]
         image: cyclopszhao/shadowsocks:latest
+        networks:
+            - sslocal
         ports:
             - 1080:1080
         restart: on-failure
@@ -10,3 +12,6 @@ services:
         volumes:
             - ./sslocal.json:/etc/sslocal.json
 
+networks:
+    sslocal:
+        driver: bridge
